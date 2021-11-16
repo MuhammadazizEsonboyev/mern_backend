@@ -1,5 +1,5 @@
-const slugify = require("slugify");
 const Category = require("../models/category");
+const slugify = require("slugify");
 
 function createCategories(categories, parentId = null) {
   const categoryList = [];
@@ -27,7 +27,6 @@ exports.addCategory = (req, res) => {
     name: req.body.name,
     slug: slugify(req.body.name),
   };
-  //    console.log(`-----${categoryObj}`)
   if (req.body.parentId) {
     categoryObj.parentId = req.body.parentId;
   }
