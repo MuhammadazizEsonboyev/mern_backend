@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -47,7 +47,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.virtual('password')
 .set(function(password){
-    this.hash_password = bcrypt.hashSync(password, 10);
+    let newPass = password.toString()
+    this.hash_password = bcrypt.hashSync(newPass, 10);
 })
 
 userSchema.virtual('fullName')
@@ -57,7 +58,8 @@ userSchema.virtual('fullName')
 
 userSchema.methods = {
     authenticate: function(password){
-        return bcrypt.compareSync(password, this.hash_password)
+        let newPass = password.toString()
+        return bcrypt.compareSync(newPass, this.hash_password)
     }
 }
 
